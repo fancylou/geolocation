@@ -1,0 +1,28 @@
+PODS:
+  - Flutter (1.0.0)
+  - geolocation (0.0.1):
+    - Flutter
+  - permission_handler_apple (9.1.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - geolocation (from `.symlinks/plugins/geolocation/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  geolocation:
+    :path: ".symlinks/plugins/geolocation/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
+
+SPEC CHECKSUMS:
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  geolocation: f6fb2a0d74cb8e6c3af9c0fd772d2714998343de
+  permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
+
+PODFILE CHECKSUM: 4c970159d9dfcc533164cd8a3c3208927da68232
+
+COCOAPODS: 1.11.2
