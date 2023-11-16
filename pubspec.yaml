@@ -1,5 +1,6 @@
 name: geolocation
 description: A simple positioning related Flutter plugin project, supporting Android and iOS platforms.
+repository: https://github.com/fancylou/geolocation
 version: 0.0.1
 
 environment:

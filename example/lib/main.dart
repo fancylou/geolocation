@@ -45,51 +45,51 @@ class _MyAppState extends State<MyApp> {
     }
     return false;
   }
-  /// 定位权限 不通过就提示错误信息
-  void _requestLocationPermission() async {
-    // 申请权限
-    bool hasLocationPermission = await _locationPermission();
-    if (hasLocationPermission) {
-      // 权限申请通过
-      if (kDebugMode) {
-        print('定位权限已开启，开始定位');
-      }
-    } else {
-      if (kDebugMode) {
-        print('没有权限，无法定位');
-      }
-    }
-  }
 
-  void _getLastKnownPosition() async {
+  Future<void> _getLastKnownPosition() async {
+    bool hasLocationPermission = await _locationPermission();
+    if (!hasLocationPermission) {
+      return;
+    }
     final result = await Geolocation.getLastKnownPosition();
     if (kDebugMode) {
       print(result?.toJson());
     }
   }
-  void _getCurrentPosition() async {
+
+  Future<void> _getCurrentPosition() async {
+    bool hasLocationPermission = await _locationPermission();
+    if (!hasLocationPermission) {
+      return;
+    }
     final result = await Geolocation.getCurrentPosition();
     if (kDebugMode) {
       print(result?.toJson());
     }
   }
-  void _startLocation() async {
+
+  Future<void> _startLocation() async {
+    bool hasLocationPermission = await _locationPermission();
+    if (!hasLocationPermission) {
+      return;
+    }
     if (_stream != null) {
       _stream!.cancel();
       _stream = null;
     }
-   _stream = Geolocation.getPositionStream().listen((position) {
-    if (kDebugMode) {
-      print(position.toJson());
-    }
-   });
-   _stream?.onError((err){
-    if (kDebugMode) {
-      print(err.toString());
-    }
-   });
+    _stream = Geolocation.getPositionStream().listen((position) {
+      if (kDebugMode) {
+        print(position.toJson());
+      }
+    });
+    _stream?.onError((err) {
+      if (kDebugMode) {
+        print(err.toString());
+      }
+    });
   }
-  void _endLocation() async {
+
+  Future<void> _endLocation() async {
     if (_stream != null) {
       _stream!.cancel();
       _stream = null;
@@ -119,18 +119,27 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: 
-          Column(children: [
+            child: Column(
+          children: [
             Text('Running on: $_platformVersion\n'),
-            TextButton(onPressed: ()=>_requestLocationPermission(), child: const Text('请求权限！'),),
-            TextButton(onPressed: ()=>_getLastKnownPosition(), child: const Text('最近定位'),),
-            TextButton(onPressed: ()=>_getCurrentPosition(), child: const Text('单次定位'),),
-            TextButton(onPressed: ()=>_startLocation(), child: const Text('开始定位'),),
-            TextButton(onPressed: ()=>_endLocation(), child: const Text('结束定位'),),
-          ],)
-          
-          
-        ),
+            TextButton(
+              onPressed: () => _getLastKnownPosition(),
+              child: const Text('最近定位'),
+            ),
+            TextButton(
+              onPressed: () => _getCurrentPosition(),
+              child: const Text('单次定位'),
+            ),
+            TextButton(
+              onPressed: () => _startLocation(),
+              child: const Text('开始定位'),
+            ),
+            TextButton(
+              onPressed: () => _endLocation(),
+              child: const Text('结束定位'),
+            ),
+          ],
+        )),
       ),
     );
   }
