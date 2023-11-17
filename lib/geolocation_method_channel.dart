@@ -48,9 +48,7 @@ class MethodChannelGeolocation extends GeolocationPlatform {
     if (_positionStream != null) {
       return _positionStream!;
     }
-    var originalStream = _eventChannel.receiveBroadcastStream(
-      // 参数传入
-    );
+    var originalStream = _eventChannel.receiveBroadcastStream();
     final positionStream = originalStream.asBroadcastStream(onCancel: (s){
       s.cancel();
       _positionStream = null;
