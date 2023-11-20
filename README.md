@@ -8,7 +8,9 @@ This will add a line like this to your package's pubspec.yaml (and run an implic
 
 ``` yaml
 dependencies:
-  geolocation: ^0.0.1
+  geolocation:
+    git:
+      url: git@github.com:fancylou/geolocation.git
 
 ```
 

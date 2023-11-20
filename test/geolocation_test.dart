@@ -22,6 +22,7 @@ class MockGeolocationPlatform
   Stream<GeoPosition> getPositionStream() {
     throw UnimplementedError();
   }
+  double distanceBetween(GeoPosition start, GeoPosition end) => 0;
    
 }
 

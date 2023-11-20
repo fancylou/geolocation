@@ -41,15 +41,12 @@ abstract class GeolocationPlatform extends PlatformInterface {
   }
 
   /// 连续定位
-  Stream<GeoPosition> getPositionStream(){
+  Stream<GeoPosition> getPositionStream() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
   /// 计算两点之间的距离
-  double distanceBetween(
-    GeoPosition start,
-    GeoPosition end,
-  ) {
+  double distanceBetween(GeoPosition start, GeoPosition end) {
     final startLatitude = start.latitude;
     final startLongitude = start.longitude;
     final endLatitude = end.latitude;
@@ -68,8 +65,5 @@ abstract class GeolocationPlatform extends PlatformInterface {
     return earthRadius * c;
   }
 
-  double _toRadians(double degree) {
-    return degree * pi / 180;
-  }
-  
+  double _toRadians(double degree) => degree * pi / 180;
 }
