@@ -10,7 +10,7 @@ This will add a line like this to your package's pubspec.yaml (and run an implic
 dependencies:
   geolocation:
     git:
-      url: git@github.com:fancylou/geolocation.git
+      url: git@gitee.com:17161934/geolocation.git
 
 ```
 
