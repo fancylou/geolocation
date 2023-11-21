@@ -183,24 +183,9 @@ class LocationUtils private constructor(context: Context) {
         val gc = Geocoder(mContext, Locale.getDefault())
         try {
             val locationList = gc.getFromLocation(latitude, longitude, 1)
-            if (locationList != null) {
-                val address = locationList[0]
-                val countryName = address.countryName //国家
-                val countryCode = address.countryCode
-                val adminArea = address.adminArea //省
-                val locality = address.locality //市
-                val subLocality = address.subLocality //区
-                val featureName = address.featureName //街道
-                var i = 0
-                while (address.getAddressLine(i) != null) {
-                    val addressLine = address.getAddressLine(i)
-                    //街道名称:广东省深圳市罗湖区蔡屋围一街深圳瑞吉酒店
-                    Log.d(TAG, "addressLine=====$addressLine")
-                    i++
-                }
-                Log.d(TAG, "countryName $countryName countryCode $countryCode adminArea $adminArea locality $locality subLocality $subLocality featureName $featureName")
+            if (locationList != null && locationList.isNotEmpty()) {
                 if (addressCallback != null) {
-                    addressCallback!!.onGetLocation(latitude, longitude, address)
+                    addressCallback!!.onGetLocation(latitude, longitude, locationList[0])
                 }
             } else {
                 Log.d(TAG, "latitude $latitude longitude $longitude  没有地址信息")

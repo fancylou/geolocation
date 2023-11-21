@@ -30,7 +30,12 @@ class EventChannelImpl: EventChannel.StreamHandler {
             LocationUtils.AddressCallback {
             override fun onGetLocation(lat: Double?, lng: Double?, address: Address?) {
                 Log.d(TAG, " 定位地址 lat：$lat lng：$lng address: $address ")
-                val position = GeoPosition(lat, lng, address?.featureName)
+                var ad = address?.featureName
+                val line0 = address?.getAddressLine(0)
+                if (line0 != null) {
+                    ad = line0
+                }
+                val position = GeoPosition(lat, lng, ad)
                 eventSink?.success(position.toHashMap())
             }
 
